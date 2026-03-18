@@ -20,12 +20,12 @@ def custom_retry_error_callback(retry_state):
 
 
 class MiniMax(BaseLlm):
-    def __init__(self, api_key, model="MiniMax-M2.5", temperature=0.6, max_tokens=get_config("MAX_MODEL_TOKEN_LIMIT"),
+    def __init__(self, api_key, model="MiniMax-M2.7", temperature=0.6, max_tokens=get_config("MAX_MODEL_TOKEN_LIMIT"),
                  top_p=1, frequency_penalty=0, presence_penalty=0, number_of_results=1):
         """
         Args:
             api_key (str): The MiniMax API key.
-            model (str): The model name (e.g. MiniMax-M2.5, MiniMax-M2.5-highspeed).
+            model (str): The model name (e.g. MiniMax-M2.7, MiniMax-M2.7-highspeed).
             temperature (float): The temperature. Must be in (0.0, 1.0].
             max_tokens (int): The maximum number of tokens.
             top_p (float): The top p.
@@ -151,7 +151,7 @@ class MiniMax(BaseLlm):
             list: The models.
         """
         try:
-            return ['MiniMax-M2.5', 'MiniMax-M2.5-highspeed']
+            return ['MiniMax-M2.7', 'MiniMax-M2.7-highspeed', 'MiniMax-M2.5', 'MiniMax-M2.5-highspeed']
         except Exception as exception:
             logger.info("MiniMax Exception:", exception)
             return []

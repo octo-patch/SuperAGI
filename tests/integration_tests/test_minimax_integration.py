@@ -19,6 +19,22 @@ class TestMiniMaxIntegration:
     def setup_method(self):
         self.api_key = os.environ["MINIMAX_API_KEY"]
 
+    def test_chat_completion_m27(self):
+        minimax = MiniMax(api_key=self.api_key, model="MiniMax-M2.7")
+        messages = [{"role": "user", "content": "Say hello in one word."}]
+        result = minimax.chat_completion(messages, max_tokens=50)
+        assert "error" not in result
+        assert "content" in result
+        assert len(result["content"]) > 0
+
+    def test_chat_completion_m27_highspeed(self):
+        minimax = MiniMax(api_key=self.api_key, model="MiniMax-M2.7-highspeed")
+        messages = [{"role": "user", "content": "What is 2+2? Reply with just the number."}]
+        result = minimax.chat_completion(messages, max_tokens=50)
+        assert "error" not in result
+        assert "content" in result
+        assert "4" in result["content"]
+
     def test_chat_completion_m25(self):
         minimax = MiniMax(api_key=self.api_key, model="MiniMax-M2.5")
         messages = [{"role": "user", "content": "Say hello in one word."}]
@@ -27,7 +43,7 @@ class TestMiniMaxIntegration:
         assert "content" in result
         assert len(result["content"]) > 0
 
-    def test_chat_completion_highspeed(self):
+    def test_chat_completion_m25_highspeed(self):
         minimax = MiniMax(api_key=self.api_key, model="MiniMax-M2.5-highspeed")
         messages = [{"role": "user", "content": "What is 2+2? Reply with just the number."}]
         result = minimax.chat_completion(messages, max_tokens=50)

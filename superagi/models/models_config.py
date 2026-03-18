@@ -115,7 +115,7 @@ class ModelsConfig(DBBaseModel):
 
     @classmethod
     def storeMiniMaxModels(cls, session, organisation_id, model_provider_id):
-        default_models = {"MiniMax-M2.5": 204000, "MiniMax-M2.5-highspeed": 204000}
+        default_models = {"MiniMax-M2.7": 204000, "MiniMax-M2.7-highspeed": 204000, "MiniMax-M2.5": 204000, "MiniMax-M2.5-highspeed": 204000}
         installed_models = [model[0] for model in session.query(Models.model_name).filter(Models.org_id == organisation_id).all()]
         for model_name, token_limit in default_models.items():
             if model_name not in installed_models:

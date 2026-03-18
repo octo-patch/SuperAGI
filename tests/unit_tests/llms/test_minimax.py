@@ -16,19 +16,23 @@ def test_get_api_key():
 
 def test_get_model_default():
     minimax = MiniMax(api_key='test_key')
-    assert minimax.get_model() == 'MiniMax-M2.5'
+    assert minimax.get_model() == 'MiniMax-M2.7'
 
 
 def test_get_model_custom():
-    minimax = MiniMax(api_key='test_key', model='MiniMax-M2.5-highspeed')
-    assert minimax.get_model() == 'MiniMax-M2.5-highspeed'
+    minimax = MiniMax(api_key='test_key', model='MiniMax-M2.7-highspeed')
+    assert minimax.get_model() == 'MiniMax-M2.7-highspeed'
 
 
 def test_get_models():
     minimax = MiniMax(api_key='test_key')
     models = minimax.get_models()
+    assert 'MiniMax-M2.7' in models
+    assert 'MiniMax-M2.7-highspeed' in models
     assert 'MiniMax-M2.5' in models
     assert 'MiniMax-M2.5-highspeed' in models
+    # M2.7 should appear before M2.5
+    assert models.index('MiniMax-M2.7') < models.index('MiniMax-M2.5')
 
 
 def test_temperature_clamping():

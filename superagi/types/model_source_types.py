@@ -22,7 +22,7 @@ class ModelSourceType(Enum):
         open_ai_models = ['gpt-4', 'gpt-3.5-turbo', 'gpt-3.5-turbo-16k', 'gpt-4-32k']
         google_models = ['google-palm-bison-001', 'models/chat-bison-001']
         replicate_models = ['replicate-llama13b-v2-chat']
-        minimax_models = ['MiniMax-M2.5', 'MiniMax-M2.5-highspeed']
+        minimax_models = ['MiniMax-M2.7', 'MiniMax-M2.7-highspeed', 'MiniMax-M2.5', 'MiniMax-M2.5-highspeed']
         if model_name in open_ai_models:
             return ModelSourceType.OpenAI
         if model_name in google_models:
