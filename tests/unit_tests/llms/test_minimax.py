@@ -16,7 +16,7 @@ def test_get_api_key():
 
 def test_get_model_default():
     minimax = MiniMax(api_key='test_key')
-    assert minimax.get_model() == 'MiniMax-M2.7'
+    assert minimax.get_model() == 'MiniMax-M3'
 
 
 def test_get_model_custom():
@@ -27,12 +27,17 @@ def test_get_model_custom():
 def test_get_models():
     minimax = MiniMax(api_key='test_key')
     models = minimax.get_models()
+    assert 'MiniMax-M3' in models
     assert 'MiniMax-M2.7' in models
     assert 'MiniMax-M2.7-highspeed' in models
-    assert 'MiniMax-M2.5' in models
-    assert 'MiniMax-M2.5-highspeed' in models
-    # M2.7 should appear before M2.5
-    assert models.index('MiniMax-M2.7') < models.index('MiniMax-M2.5')
+    # M3 should appear first (as the default)
+    assert models.index('MiniMax-M3') < models.index('MiniMax-M2.7')
+    # Older models should be removed
+    assert 'MiniMax-M2.5' not in models
+    assert 'MiniMax-M2.5-highspeed' not in models
+    assert 'MiniMax-M2.1' not in models
+    assert 'MiniMax-M2' not in models
+    assert 'MiniMax-M1' not in models
 
 
 def test_temperature_clamping():
@@ -51,7 +56,7 @@ def test_temperature_clamping():
 
 @patch('superagi.llms.minimax.openai')
 def test_chat_completion(mock_openai):
-    model = 'MiniMax-M2.5'
+    model = 'MiniMax-M3'
     api_key = 'test_key'
     minimax_instance = MiniMax(api_key, model=model)
 
